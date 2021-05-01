@@ -1,7 +1,10 @@
 package leetcode.common.model;
 
+import lombok.ToString;
+
+@ToString
 public class Tree {
-	 Node root;
+	Node root;
 
 	public Node getRoot() {
 		return root;
