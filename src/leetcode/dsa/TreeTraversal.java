@@ -1,6 +1,8 @@
 package leetcode.dsa;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import leetcode.common.model.Node;
 
@@ -46,6 +48,10 @@ public class TreeTraversal {
 		results = new ArrayList<String>();
 		postOrder(root, results);
 		System.out.println("postOrder: " + results);
+
+		results = new ArrayList<String>();
+		levelOrder(root, results);
+		System.out.println("levelOrder: " + results);
 	}
 
 	private static void preOrder(Node root, ArrayList<String> elements) {
@@ -73,5 +79,25 @@ public class TreeTraversal {
 		preOrder(root.getLeft(), elements);
 		preOrder(root.getRight(), elements);
 		elements.add("" + root.getData());
+	}
+
+	private static void levelOrder(Node root, ArrayList<String> elements) {
+		if (root == null)
+			return;
+
+		Queue<Node> nodes = new LinkedList<Node>();
+		nodes.add(root);
+
+		while (!nodes.isEmpty()) {
+			Node node = nodes.poll();
+			if (node == null) {
+				continue;
+			}
+			elements.add("" + node.getData());
+			if (node.getLeft() != null)
+				nodes.add(node.getLeft());
+			if (node.getRight() != null)
+				nodes.add(node.getRight());
+		}
 	}
 }
